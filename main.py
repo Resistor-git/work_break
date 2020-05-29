@@ -27,10 +27,11 @@ def user_input():
 def countdown(hours=0, mins=0, secs=30):
     countdown_secs = (hours * 3600) + (mins * 60) + secs
     while countdown_secs > 0:
-        #print('start', countdown_secs)
+        print('start', countdown_secs)
         time.sleep(1)
         countdown_secs -= 1
-        #print('finish', countdown_secs)
+        print('finish', countdown_secs)
+
 
 
 #def restarter():
@@ -45,11 +46,14 @@ def user_inp_window():
     user_inp.title("Введите данные о перерыве")
 
     hours = tk.Entry(user_inp)
+    hours.insert(0, "0")
     hours.pack()
     hours.focus_set()
     minutes = tk.Entry(user_inp)
+    minutes.insert(0, "0")
     minutes.pack()
     seconds = tk.Entry(user_inp)
+    seconds.insert(0, "2")
     seconds.pack()
 
     ok_button = tk.Button(user_inp, text='OK', command=user_input)
@@ -71,7 +75,8 @@ def break_msg_window():
 
     # the following string doesn't work as intended if 'command=countdown(int(h), int(m), int(s)))'
     # google: 'tkinter button executed automatically'. Answer: either use lambda, or use functools.partial
-    reset_button = tk.Button(break_msg, text='Перезапустить таймер', command=(lambda: countdown(int(h), int(m), int(s))))
+    reset_button = tk.Button(break_msg, text='Перезапустить таймер c прежними параметрами',
+                             command=(lambda: countdown(int(h), int(m), int(s))))
     reset_button.pack()
 
     break_msg.mainloop()
@@ -81,6 +86,7 @@ def runner():
     user_inp_window()
     countdown(int(h), int(m), int(s))
     break_msg_window()
+
 
 
 runner()
