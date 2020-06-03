@@ -1,6 +1,6 @@
 # TODO
 # user input (interface)
-# user_input add defaults
+# add a timer window
 # align window (lower center?)
 # ? refactor into several files: logic, interface ...
 # ? refactor to classes (mostly tkinter)
@@ -33,11 +33,6 @@ def countdown(hours=0, mins=0, secs=30):
         print('finish', countdown_secs)
 
 
-
-#def restarter():
- #   countdown(h, m, s)
-
-
 def user_inp_window():
     # window prompting user to enter hours, minutes and seconds
     global user_inp, hours, minutes, seconds
@@ -60,6 +55,18 @@ def user_inp_window():
     ok_button.pack(side='bottom')
 
     user_inp.mainloop()
+
+
+# def timer_window():
+#     timer = tk.Tk()
+#     timer.title('До следующего перерыва осталось:')
+#
+#     hours_left = hours
+#     minutes_left = minutes
+#     seconds_left = seconds
+#
+#     initial_time = dt.time(hours_left, minutes_left, seconds_left)
+#     time_left =
 
 
 def break_msg_window():
