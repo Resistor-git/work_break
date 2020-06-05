@@ -71,6 +71,7 @@ def user_inp_window():
 
 def break_msg_window():
     # widget informs about the break time and asks for restart
+    global break_msg
     break_msg = tk.Tk()
     break_msg.title('Сообщение о перерыве')
 
@@ -80,20 +81,24 @@ def break_msg_window():
     break_msg_text = tk.Label(text='Пора на перерыв', font='arial 32')
     break_msg_text.pack()
 
-    # the following string doesn't work as intended if 'command=countdown(int(h), int(m), int(s)))'
+    # creation of the reset button
+    # the following string doesn't work as intended if 'command=reset()'
     # google: 'tkinter button executed automatically'. Answer: either use lambda, or use functools.partial
-    reset_button = tk.Button(break_msg, text='Перезапустить таймер c прежними параметрами',
-                             command=(lambda: countdown(int(h), int(m), int(s))))
+    reset_button = tk.Button(break_msg, text='Перезапустить таймер c прежними параметрами', command=(lambda: reset()))
     reset_button.pack()
 
     break_msg.mainloop()
+
+
+def reset():
+    break_msg.destroy()
+    countdown(int(h), int(m), int(s))
 
 
 def runner():
     user_inp_window()
     countdown(int(h), int(m), int(s))
     break_msg_window()
-
 
 
 runner()
