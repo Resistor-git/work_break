@@ -31,6 +31,7 @@ def countdown(hours=0, mins=0, secs=30):
         time.sleep(1)
         countdown_secs -= 1
         print('finish', countdown_secs)
+        print('countdown finished')
 
 
 def user_inp_window():
@@ -55,6 +56,7 @@ def user_inp_window():
     ok_button.pack(side='bottom')
 
     user_inp.mainloop()
+    print('user_inp_window finished')
 
 
 # def timer_window():
@@ -88,11 +90,14 @@ def break_msg_window():
     reset_button.pack()
 
     break_msg.mainloop()
+    print('break_msg_window finished')
 
 
 def reset():
     break_msg.destroy()
     countdown(int(h), int(m), int(s))
+    break_msg_window()
+    print('reset finished')
 
 
 def runner():
