@@ -1,5 +1,6 @@
 # TODO
-# user input (interface)
+# user input interface improvements (names for entries :'часы, минуты, секунды')
+# StringVar() https://metanit.com/python/tutorial/9.6.php
 # add a timer window
 # align window (lower center?)
 # ? refactor into several files: logic, interface ...
@@ -41,10 +42,12 @@ def user_inp_window():
     user_inp = tk.Tk()
     user_inp.title("Введите данные о перерыве")
 
+    user_inp.geometry('350x100')
+
     hours = tk.Entry(user_inp)
     hours.insert(0, "0")
     hours.pack()
-    hours.focus_set()
+    hours.focus_set()  # sets cursor on this place
     minutes = tk.Entry(user_inp)
     minutes.insert(0, "0")
     minutes.pack()
@@ -59,26 +62,13 @@ def user_inp_window():
     print('user_inp_window finished')
 
 
-# def timer_window():
-#     timer = tk.Tk()
-#     timer.title('До следующего перерыва осталось:')
-#
-#     hours_left = hours
-#     minutes_left = minutes
-#     seconds_left = seconds
-#
-#     initial_time = dt.time(hours_left, minutes_left, seconds_left)
-#     time_left =
-
-
 def break_msg_window():
     # widget informs about the break time and asks for restart
     global break_msg
+
     break_msg = tk.Tk()
     break_msg.title('Сообщение о перерыве')
-
-    #frame = tk.Frame(root)
-    #frame.pack()
+    break_msg.attributes("-topmost", True)  # places this widget on top of all other windows
 
     break_msg_text = tk.Label(text='Пора на перерыв', font='arial 32')
     break_msg_text.pack()
@@ -89,11 +79,13 @@ def break_msg_window():
     reset_button = tk.Button(break_msg, text='Перезапустить таймер c прежними параметрами', command=(lambda: reset()))
     reset_button.pack()
 
+
     break_msg.mainloop()
     print('break_msg_window finished')
 
 
 def reset():
+    # reset button ('Перезапустить таймер с прежними параметрами') functionality
     break_msg.destroy()
     countdown(int(h), int(m), int(s))
     break_msg_window()
@@ -104,6 +96,18 @@ def runner():
     user_inp_window()
     countdown(int(h), int(m), int(s))
     break_msg_window()
+
+
+# def timer_window():
+#     timer = tk.Tk()
+#     timer.title('До следующего перерыва осталось:')
+#
+#     hours_left = hours
+#     minutes_left = minutes
+#     seconds_left = seconds
+#
+#     initial_time = dt.time(hours_left, minutes_left, seconds_left)
+#     time_left =
 
 
 runner()
