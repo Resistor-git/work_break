@@ -1,17 +1,22 @@
 # TODO
+# ПРОВЕРКА SOUND_VAR ПРОИСХОДИТ ДО КЛИКА ПО ЧЕКБОКСУ (СЛЕДОВАТЕЛЬНО SOUND_VAR ВСЕГДА = 0); ИСПРАВИТЬ
 # user input interface improvements (names for entries :'часы, минуты, секунды')
 # StringVar() https://metanit.com/python/tutorial/9.6.php
 # add a timer window
 # align window (lower center?)
 # ? refactor into several files: logic, interface ...
-# ? refactor to classes (mostly tkinter)
+# refactor to classes (mostly tkinter)
 
-# окно с перезапуском не пропадает после нажатия кнопки
 # для рефакторинга может пригодиться tk.toplevel
 
 #import datetime as dt
 import time
+import winsound
 import tkinter as tk
+
+# constants: frequency and duration - for sound function
+FREQUENCY = 2500  # Set Frequency To 2500 Hertz
+DURATION = 1000  # Set Duration, 1000 ms == 1 second
 
 
 def user_input():
@@ -80,6 +85,12 @@ def break_msg_window():
     reset_button.pack()
 
 
+# ПРОВЕРКА SOUND_VAR ПРОИСХОДИТ ДО КЛИКА ПО ЧЕКБОКСУ (СЛЕДОВАТЕЛЬНО SOUND_VAR ВСЕГДА = 0); ИСПРАВИТЬ
+    sound_var = tk.IntVar()
+    sound_checkbox = tk.Checkbutton(break_msg, text='Звук', variable=sound_var, onvalue=1, offvalue=0)
+    print('sound_var =', sound_var.get())
+    sound_checkbox.pack()
+
     break_msg.mainloop()
     print('break_msg_window finished')
 
@@ -96,6 +107,8 @@ def runner():
     user_inp_window()
     countdown(int(h), int(m), int(s))
     break_msg_window()
+    sound()
+ 
 
 
 # def timer_window():
@@ -109,5 +122,12 @@ def runner():
 #     initial_time = dt.time(hours_left, minutes_left, seconds_left)
 #     time_left =
 
+def sound():
+    print('sound')
+    if sound_var == 1: # watch break_msg_window
+        winsound.Beep(FREQUENCY, DURATION)
+    else:
+        pass
+    #pass
 
 runner()
